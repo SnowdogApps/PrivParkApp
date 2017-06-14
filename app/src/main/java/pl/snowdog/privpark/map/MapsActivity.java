@@ -1,13 +1,21 @@
 package pl.snowdog.privpark.map;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.annimon.stream.Stream;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -17,6 +25,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.messaging.RemoteMessage;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +57,44 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Na
         mapFragment.getMapAsync(this);
 
         mNavigationView.setNavigationItemSelectedListener(this);
+        if (getIntent().getExtras() != null && getIntent().getExtras().getBoolean("show_dialog", false)) {
+            showDialog();
+        }
+    }
+
+    private void showDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("ooo")
+                .setMessage("sadads")
+                .setPositiveButton(android.R.string.ok, null)
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showNotification();
+    }
+
+    private void showNotification() {
+        Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra("show_dialog", true);
+        PendingIntent pi = PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Notification n  = new Notification.Builder(this)
+                .setContentTitle("New mail from " + "test@gmail.com")
+                .setContentText("Subject")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentIntent(pi)
+                .setAutoCancel(true)
+                .addAction(R.mipmap.ic_launcher, "Cancel", pi)
+                .addAction(R.mipmap.ic_launcher, "Accept", pi).build();
+
+
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        notificationManager.notify(0, n);
     }
 
     @Override

@@ -8,6 +8,9 @@
         <item
             android:id="@+id/history"
             android:title="History"/>
+
+        <item
+            android:title="Logout"/>
     </group>
 
 </menu>

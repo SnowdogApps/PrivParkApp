@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "993397406031",
+    "firebase_url": "https://privpark-74202.firebaseio.com",
+    "project_id": "privpark-74202",
+    "storage_bucket": "privpark-74202.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:993397406031:android:6212d2e3a44b30fe",
+        "android_client_info": {
+          "package_name": "pl.snowdog.privpark"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "993397406031-8n43s52h5tkif2a0timblb0p4he2ocsf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUUeqeW_vXzCX9iiuKG5y8WiPksjM47Mk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

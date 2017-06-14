@@ -5,7 +5,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,12 +16,17 @@ import pl.snowdog.privpark.map.MapsActivity;
 import timber.log.Timber;
 
 public class RemoteDatabaseController {
-    public RemoteDatabaseController(final Context context) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("car_plate");
+    FirebaseDatabase database;
+    DatabaseReference mCarPlate, mState, mSpotAvailable;
 
-//        myRef.setValue("Hello, World!");
-        myRef.addValueEventListener(new ValueEventListener() {
+    public RemoteDatabaseController(final Context context) {
+        database = FirebaseDatabase.getInstance();
+        mCarPlate = database.getReference("car_plate");
+        mState = database.getReference("state");
+        mSpotAvailable = database.getReference("spot_available");
+
+//        mCarPlate.setValue("Hello, World!");
+        mCarPlate.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
@@ -58,5 +62,13 @@ public class RemoteDatabaseController {
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0, n);
+    }
+
+    public void setSelectedState() {
+        mState.setValue(true);
+    }
+
+    public void setSpotAvailable() {
+        mSpotAvailable.setValue(true);
     }
 }

@@ -1,14 +1,14 @@
-package pl.snowdog.privpark;
+package pl.snowdog.privpark.model;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class ParkingSpot {
+public class ParkingCurrentData {
     private String mName;
     private String mAvailableHours;
     private String mPrice;
     private LatLng mLatLng;
 
-    public ParkingSpot(String name, String availableHours, String price, double v1, double v2) {
+    public ParkingCurrentData(String name, String availableHours, String price, double v1, double v2) {
         mName = name;
         mAvailableHours = availableHours;
         mPrice = price;

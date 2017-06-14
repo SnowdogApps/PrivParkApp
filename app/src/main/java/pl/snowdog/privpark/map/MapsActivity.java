@@ -1,4 +1,4 @@
-package pl.snowdog.privpark;
+package pl.snowdog.privpark.map;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -21,6 +21,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pl.snowdog.privpark.history.HistoryActivity;
+import pl.snowdog.privpark.R;
+import pl.snowdog.privpark.data_source.ParkingCurrentDataRepository;
+import pl.snowdog.privpark.model.ParkingCurrentData;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
@@ -29,7 +33,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @BindView(R.id.nav_view)
     NavigationView mNavigationView;
     private GoogleMap mMap;
-    private ParkingSpotsDataSource mParkingSpotsDataSource = new ParkingSpotsDataSource();
+    private ParkingCurrentDataRepository mParkingCurrentDataRepository = new ParkingCurrentDataRepository();
     private final LatLng london = new LatLng(51.509865, -0.118092);
 
     @Override
@@ -57,14 +61,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        Stream.of(mParkingSpotsDataSource.getParkingSpots()).forEach(new com.annimon.stream.function.Consumer<ParkingSpot>() {
+        Stream.of(mParkingCurrentDataRepository.getParkingCurrentDatas()).forEach(new com.annimon.stream.function.Consumer<ParkingCurrentData>() {
             @Override
-            public void accept(ParkingSpot parkingSpot) {
+            public void accept(ParkingCurrentData parkingCurrentData) {
                 mMap.addMarker(new MarkerOptions()
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                        .position(parkingSpot.getLatLng())
-                        .title(parkingSpot.getName())
-                        .snippet(parkingSpot.getSnippet()));
+                        .position(parkingCurrentData.getLatLng())
+                        .title(parkingCurrentData.getName())
+                        .snippet(parkingCurrentData.getSnippet()));
             }
         });
         mMap.setMinZoomPreference(12.0f);

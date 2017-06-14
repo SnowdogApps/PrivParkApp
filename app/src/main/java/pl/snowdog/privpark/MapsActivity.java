@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.annimon.stream.Stream;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -19,6 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
@@ -79,5 +81,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @OnClick(R.id.open_menu)
+    public void onMenuOpenClick(View view) {
+        mDrawerLayout.openDrawer(GravityCompat.START);
     }
 }

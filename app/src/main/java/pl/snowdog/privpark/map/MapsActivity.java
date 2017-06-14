@@ -72,32 +72,6 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Na
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        showNotification();
-    }
-
-    private void showNotification() {
-        Intent intent = new Intent(this, MapsActivity.class);
-        intent.putExtra("show_dialog", true);
-        PendingIntent pi = PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        Notification n  = new Notification.Builder(this)
-                .setContentTitle("Parking spot available")
-                .setContentText("Do you want to park there?")
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentIntent(pi)
-                .setAutoCancel(true)
-                .addAction(R.mipmap.ic_launcher, "Cancel", pi)
-                .addAction(R.mipmap.ic_launcher, "Accept", pi).build();
-
-
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-        notificationManager.notify(0, n);
-    }
-
-    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {

@@ -18,7 +18,7 @@ public class PrivParkApp extends Application {
         String token = FirebaseInstanceId.getInstance().getToken();
         Timber.i("Token: " + token);
         mParkingSpotsRepository = new ParkingSpotsRepository();
-        mRemoteDatabaseController = new RemoteDatabaseController();
+        mRemoteDatabaseController = new RemoteDatabaseController(getApplicationContext());
     }
 
     public ParkingSpotsRepository getParkingSpotsRepository() {

@@ -1,26 +1,24 @@
-package pl.snowdog.privpark.model;
+package pl.snowdog.privpark.data_source.model;
 
 import com.google.android.gms.maps.model.LatLng;
 
 public class ParkingCurrentData {
-    private String mName;
     private String mAvailableHours;
     private String mPrice;
-    private LatLng mLatLng;
+    private ParkingSpot mParkingSpot;
 
-    public ParkingCurrentData(String name, String availableHours, String price, double v1, double v2) {
-        mName = name;
+    public ParkingCurrentData(ParkingSpot parkingSpot, String availableHours, String price) {
         mAvailableHours = availableHours;
         mPrice = price;
-        mLatLng = new LatLng(v1, v2);
+        mParkingSpot = parkingSpot;
     }
 
     public String getName() {
-        return mName;
+        return mParkingSpot.getName();
     }
 
     public LatLng getLatLng() {
-        return mLatLng;
+        return mParkingSpot.getLatLng();
     }
 
     public String getSnippet() {

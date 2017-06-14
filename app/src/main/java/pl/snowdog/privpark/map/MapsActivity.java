@@ -21,19 +21,20 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pl.snowdog.privpark.BaseActivity;
 import pl.snowdog.privpark.history.HistoryActivity;
 import pl.snowdog.privpark.R;
 import pl.snowdog.privpark.data_source.ParkingCurrentDataRepository;
-import pl.snowdog.privpark.model.ParkingCurrentData;
+import pl.snowdog.privpark.data_source.model.ParkingCurrentData;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
+public class MapsActivity extends BaseActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
     @BindView(R.id.nav_view)
     NavigationView mNavigationView;
     private GoogleMap mMap;
-    private ParkingCurrentDataRepository mParkingCurrentDataRepository = new ParkingCurrentDataRepository();
+    private ParkingCurrentDataRepository mParkingCurrentDataRepository;
     private final LatLng london = new LatLng(51.509865, -0.118092);
 
     @Override
@@ -41,6 +42,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        mParkingCurrentDataRepository = new ParkingCurrentDataRepository(getParkingSpotsRepository());
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);

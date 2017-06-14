@@ -10,7 +10,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import pl.snowdog.privpark.R;
-import pl.snowdog.privpark.model.ParkingAction;
+import pl.snowdog.privpark.data_source.model.ParkingAction;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
     private List<ParkingAction> mParkingActions = new ArrayList<>();

@@ -10,4 +10,16 @@ public class ParkingAction {
         mCost = cost;
         mTime = time;
     }
+
+    public String getName() {
+        return mParkingSpot.getName();
+    }
+
+    public String getCost() {
+        return mCost;
+    }
+
+    public String getTime() {
+        return mTime;
+    }
 }

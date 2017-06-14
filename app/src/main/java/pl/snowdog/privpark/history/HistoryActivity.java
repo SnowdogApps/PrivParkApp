@@ -33,6 +33,10 @@ public class HistoryActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("History");
         mParkingHistoryDataSource = new ParkingHistoryDataSource(getParkingSpotsRepository());
+        initRecyclerView();
+    }
+
+    private void initRecyclerView() {
         mHistoryAdapter = new HistoryAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mHistoryAdapter);

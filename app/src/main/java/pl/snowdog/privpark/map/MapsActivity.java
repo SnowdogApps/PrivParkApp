@@ -64,8 +64,8 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Na
 
     private void showDialog() {
         new AlertDialog.Builder(this)
-                .setTitle("ooo")
-                .setMessage("sadads")
+                .setTitle("Want to park there?")
+                .setMessage("Available until 17:00, costs 2 £ per hour")
                 .setPositiveButton(android.R.string.ok, null)
                 .setNegativeButton(android.R.string.cancel, null)
                 .show();
@@ -82,8 +82,8 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Na
         intent.putExtra("show_dialog", true);
         PendingIntent pi = PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification n  = new Notification.Builder(this)
-                .setContentTitle("New mail from " + "test@gmail.com")
-                .setContentText("Subject")
+                .setContentTitle("Parking spot available")
+                .setContentText("Do you want to park there?")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(pi)
                 .setAutoCancel(true)

@@ -30,8 +30,8 @@ public class HistoryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         ButterKnife.bind(this);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("History");
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setTitle("History");
         mParkingHistoryDataSource = new ParkingHistoryDataSource(getParkingSpotsRepository());
         initRecyclerView();
     }

@@ -9,6 +9,7 @@ import timber.log.Timber;
 
 public class PrivParkApp extends Application {
     private ParkingSpotsRepository mParkingSpotsRepository;
+    private RemoteDatabaseController mRemoteDatabaseController;
 
     @Override
     public void onCreate() {
@@ -17,9 +18,14 @@ public class PrivParkApp extends Application {
         String token = FirebaseInstanceId.getInstance().getToken();
         Timber.i("Token: " + token);
         mParkingSpotsRepository = new ParkingSpotsRepository();
+        mRemoteDatabaseController = new RemoteDatabaseController();
     }
 
     public ParkingSpotsRepository getParkingSpotsRepository() {
         return mParkingSpotsRepository;
+    }
+
+    public RemoteDatabaseController getRemoteDatabaseController() {
+        return mRemoteDatabaseController;
     }
 }

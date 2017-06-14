@@ -9,4 +9,9 @@ public class BaseActivity extends AppCompatActivity {
     public ParkingSpotsRepository getParkingSpotsRepository() {
         return ((PrivParkApp) getApplication()).getParkingSpotsRepository();
     }
+
+    public RemoteDatabaseController getRemoteConfigController() {
+        return ((PrivParkApp) getApplication()).getRemoteDatabaseController();
+    }
+
 }

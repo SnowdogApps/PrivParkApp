@@ -24,6 +24,18 @@
             android:layout_width="wrap_content"
             android:padding="16dp"
             android:src="@drawable/hamburger_icon" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:padding="16dp"
+            android:textSize="20sp"
+            android:elevation="12dp"
+            android:drawableRight="@drawable/ic_search_black_24dp"/>
     </FrameLayout>
 
     <android.support.design.widget.NavigationView

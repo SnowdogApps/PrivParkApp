@@ -44,7 +44,7 @@ public class RemoteDatabaseController {
         });
     }
 
-    private void showNotification(Context context, String value) {
+    public void showNotification(Context context, String value) {
         Intent intent = new Intent(context, MapsActivity.class);
         intent.putExtra("show_dialog", true);
         PendingIntent pi = PendingIntent.getActivity(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);

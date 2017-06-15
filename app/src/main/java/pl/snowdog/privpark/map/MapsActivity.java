@@ -1,25 +1,18 @@
 package pl.snowdog.privpark.map;
 
 import android.Manifest;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.annimon.stream.Stream;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,8 +21,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.messaging.RemoteMessage;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,6 +57,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Na
         if (getIntent().getExtras() != null && getIntent().getExtras().getBoolean("show_dialog", false)) {
             showDialog();
         }
+//        showChargeDialog();
     }
 
     private void showDialog() {
@@ -74,6 +68,12 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Na
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         getRemoteConfigController().setSelectedState();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                showChargeDialog();
+                            }
+                        }, 3000);
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -84,6 +84,16 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Na
                 })
                 .show();
     }
+
+
+    private void showChargeDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Parking finished")
+                .setMessage("Thank you for using PrivPark.\n You parked 2 hrs 21 minutes. Total cost: 5.12 £ ")
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -112,6 +122,13 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Na
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
                         .position(london)
                         .title("You are here"));
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                getRemoteConfigController().showNotification(MapsActivity.this, "ABC 123");
+                return false;
+            }
+        });
         mMap.setMinZoomPreference(12.0f);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(london));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -125,12 +142,6 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Na
             return;
         }
         mMap.setMyLocationEnabled(true);
-//        mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
-//            @Override
-//            public void onMyLocationChange(Location location) {
-//                mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
-//            }
-//        });
     }
 
     @Override

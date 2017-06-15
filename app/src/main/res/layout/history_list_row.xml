@@ -13,18 +13,22 @@
         <TextView
             android:id="@+id/history_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/history_time"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
     </LinearLayout>
 
     <TextView
         android:id="@+id/history_cost"
         android:gravity="right|center_vertical"
         android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textSize="22sp"/>
 </LinearLayout>

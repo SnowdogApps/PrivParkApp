@@ -108,6 +108,10 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Na
                         .snippet(parkingCurrentData.getSnippet()));
             }
         });
+        mMap.addMarker(new MarkerOptions()
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                        .position(london)
+                        .title("You are here"));
         mMap.setMinZoomPreference(12.0f);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(london));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -121,12 +125,12 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Na
             return;
         }
         mMap.setMyLocationEnabled(true);
-        mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
-            @Override
-            public void onMyLocationChange(Location location) {
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
-            }
-        });
+//        mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+//            @Override
+//            public void onMyLocationChange(Location location) {
+//                mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
+//            }
+//        });
     }
 
     @Override
